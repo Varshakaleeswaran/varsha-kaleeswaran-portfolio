@@ -22,33 +22,24 @@ Personal portfolio showcasing my work across:
 
 ## Portfolio Stack
 
-React
-TypeScript
-Vite
-Tailwind CSS
+React · TypeScript · Vite · Tailwind CSS
 
 ## Run Locally
 
+```bash
 npm install
-
 npm run dev
+```
 
 ## Build
 
+```bash
 npm run build
+```
 
 ## Author
 
 Varsha Kaleeswaran
 
-GitHub:
-https://github.com/Varshakaleeswaran
-
-LinkedIn:
-https://www.linkedin.com/in/varsha-kaleeswaran-2b2b2a273/
-
-Email.ID:
-kaleeswaranvarsha@gmail.com
-
-ph.no: 
-+91 8526776902
+- GitHub: https://github.com/Varshakaleeswaran
+- LinkedIn: https://www.linkedin.com/in/varsha-kaleeswaran-2b2b2a273/

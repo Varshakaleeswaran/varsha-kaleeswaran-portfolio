@@ -1,567 +1,318 @@
 import type { CaseStudy } from './types';
 
 export const caseStudies: CaseStudy[] = [
+  // ── 1. CAREER FORGE ─────────────────────────────────────────────────────
   {
     projectId: 'career-forge',
-    problem:
-      'Students and job seekers often know the role they want but do not have a structured way to compare their current resume skills with the skills expected for that role.',
-    objective:
-      'Build an AI-powered career intelligence application that can analyze a resume for a selected career role, identify matched and missing skills, and provide career-readiness feedback.',
+    problem: 'Students and job seekers may have difficulty understanding whether their current skills align with the requirements of a target role.',
+    objective: 'Build an AI-assisted career intelligence system that evaluates resume skills against predefined career-role requirements and presents clear skill-gap information.',
     role: 'Project Developer',
     star: {
-      situation:
-        'Students and job seekers often know the role they want but do not have a structured way to compare their current resume skills with the skills expected for that role.',
-      task: 'Build an AI-powered career intelligence application that can analyze a resume for a selected career role, identify matched and missing skills, and provide career-readiness feedback.',
-      action:
-        'I developed the application using Streamlit for the user interface and FastAPI for the backend. I implemented PDF resume processing using PyMuPDF, extracted resume text, and passed the relevant content to the Groq API using the llama-3.3-70b-versatile model. I designed a structured JSON extraction prompt so the LLM returns technical skills, soft skills, education, projects, and experience information in a predictable format. I then normalized the extracted technical skills and compared them with predefined skill requirements for the selected role. I implemented the matched-skill, missing-skill, and match-percentage calculation and displayed the results through the Streamlit interface.',
-      result:
-        'The application can analyze a PDF resume against supported career roles and return structured career-readiness information including matched skills, missing skills, detected skills, education, projects, match percentage, and role-based feedback.',
+      situation: 'Students and job seekers need a structured way to understand how well their current resume and skills align with a target career role.',
+      task: 'I wanted to build an AI-powered system that could extract useful information from a resume, compare it with predefined role requirements, and provide an understandable career-readiness result.',
+      action: 'I built the application using a Streamlit interface and FastAPI backend. I used PyMuPDF to extract text from uploaded PDF resumes and integrated the Groq API using the llama-3.3-70b-versatile model. I designed a structured JSON prompt to extract technical_skills, soft_skills, education, projects, experience_years, and related resume information. I normalized the extracted technical skills and compared them with predefined role requirements. I then calculated matched skills, missing skills, and the overall match percentage and displayed the results through the Streamlit interface.',
+      result: 'The application analyzes a PDF resume against supported career roles and returns structured career-readiness information including extracted resume details, matched skills, missing skills, match percentage, and feedback.',
     },
-    technologies: [
-      'Python',
-      'FastAPI',
-      'Streamlit',
-      'PyMuPDF / fitz',
-      'Groq API',
-      'llama-3.3-70b-versatile',
-      'JSON',
-      'Prompt Engineering',
-    ],
-    architecture: [
-      'PDF Resume',
-      'Streamlit UI',
-      'FastAPI /analyze endpoint',
-      'PyMuPDF text extraction',
-      'Groq LLM structured extraction',
-      'JSON parsing',
-      'Skill normalization',
-      'Role-skill comparison',
-      'Match percentage',
-      'Career-readiness result',
-      'Streamlit dashboard',
-    ],
+    technologies: ['Python', 'FastAPI', 'Streamlit', 'PyMuPDF / fitz', 'Groq API', 'llama-3.3-70b-versatile', 'JSON', 'Prompt Engineering'],
+    architecture: ['PDF Resume', 'Streamlit UI', 'FastAPI /analyze endpoint', 'PyMuPDF text extraction', 'Groq LLM structured extraction', 'JSON parsing', 'Skill normalization', 'Role-skill comparison', 'Match percentage calculation', 'Career-readiness result', 'Streamlit dashboard'],
     workflow: [
       'User selects a target career role',
-      'User uploads a PDF resume through Streamlit',
-      'Streamlit sends the PDF and selected role to the FastAPI /analyze endpoint',
-      'FastAPI temporarily stores the uploaded file',
-      'PyMuPDF extracts text from the PDF',
-      'Extracted resume text is sent to the Groq LLM',
-      'A structured JSON extraction prompt is used',
-      'The model is asked to return technical_skills, soft_skills, education, projects, and experience_years',
-      'Backend parses the returned JSON',
-      'Technical skills are normalized to lowercase',
-      'Required skills for the selected role are loaded',
-      'Matching skills are calculated',
-      'Missing skills are calculated',
+      'User uploads a PDF resume',
+      'Streamlit sends the resume to the FastAPI backend',
+      'The backend temporarily handles the uploaded file',
+      'PyMuPDF extracts resume text',
+      'The extracted text is passed to the Groq LLM',
+      'A structured prompt instructs the LLM to return resume information in JSON format',
+      'The returned response is parsed into structured data',
+      'Technical skills are normalized into a common format',
+      'Required skills for the selected role are loaded from the predefined role mapping',
+      'Matching and missing skills are identified',
       'Match percentage is calculated',
-      'Results are returned as JSON',
-      'Streamlit displays the analysis',
+      'Career-readiness feedback is generated',
+      'Results are displayed in the Streamlit dashboard',
     ],
-    implementation:
-      'I implemented PDF resume processing with PyMuPDF, structured LLM extraction via the Groq API (llama-3.3-70b-versatile), JSON parsing, skill normalization to lowercase, and a match calculation of (matched required skills / total required role skills) \u00d7 100. Supported target roles include ML Engineer, Data Analyst, Data Scientist, and Software Engineer, each with predefined skill mappings. The feedback logic returns "Strong match!" for scores \u2265 70, "Keep learning!" for scores \u2265 40, and "More skills needed" otherwise. The first 3000 characters of the resume are passed into the prompt.',
-    aiApproach:
-      'The AI approach uses the Groq API with the llama-3.3-70b-versatile model for structured resume information extraction. The model is instructed to return a fixed JSON schema containing technical_skills, soft_skills, education, projects, and experience_years. Technical skills are then normalized and compared against predefined role-skill mappings to compute a match percentage.',
-    promptEngineering:
-      'The resume parser uses an explicit extraction prompt. The prompt defines the model\u2019s role as a resume parser, defines the extraction task, requires a fixed JSON schema, requires JSON-only output, and prohibits markdown, backticks, and explanatory text. Temperature is set to 0.1 for deterministic, structured output. The first 3000 characters of the resume content are passed into the prompt to fit within context limits while preserving the most relevant information.',
+    implementation: 'PDF text is extracted using PyMuPDF. The first 3000 characters of the extracted resume text are passed to the LLM prompt. Resume information is requested using a fixed JSON schema. Technical skills are normalized using lowercase comparison. Supported roles: ML Engineer, Data Analyst, Data Scientist, Software Engineer. Match percentage = (Matched required skills / Total required role skills) × 100. Feedback: ≥70 → "Strong match!", ≥40 → "Keep learning!", otherwise → "More skills needed".',
+    aiApproach: 'The Groq API with llama-3.3-70b-versatile is used for structured resume information extraction. The LLM converts unstructured resume text into structured fields that can be processed programmatically.',
+    promptEngineering: 'The prompt defines the LLM as a resume parser, specifies exactly what information to extract, provides a fixed JSON schema, requires JSON-only output, prevents markdown/backticks/explanations, uses low temperature for consistent structured output, and processes the first 3000 characters of extracted text.',
     inputProcessingOutput: {
       input: 'PDF Resume + Target Career Role',
-      processing:
-        'PDF text extraction \u2192 structured LLM extraction \u2192 technical-skill normalization \u2192 role skill lookup \u2192 matching \u2192 missing-skill calculation \u2192 percentage calculation',
-      output:
-        'Extracted resume information + Matched Skills + Missing Skills + Match Percentage + Career-readiness Feedback',
+      processing: 'PDF text extraction → Structured LLM extraction → Skill normalization → Role lookup → Matching → Missing-skill calculation → Match percentage',
+      output: 'Extracted Resume Information + Matched Skills + Missing Skills + Match Percentage + Career-readiness Feedback',
     },
-    challenges: [
-      'Getting the LLM to reliably return valid JSON without markdown wrappers or explanatory text',
-      'Normalizing extracted skills consistently so they can be compared against role requirements',
-      'Handling resumes of varying length within the model\u2019s context window',
-    ],
-    solutions: [
-      'Designed a strict structured-output prompt that prohibits markdown, backticks, and explanatory text, with temperature 0.1',
-      'Normalized all extracted technical skills to lowercase before comparison',
-      'Passed the first 3000 characters of the resume into the prompt to fit within context limits',
-    ],
-    resultsOrStatus:
-      'The application can analyze a PDF resume against supported career roles and return structured career-readiness information including matched skills, missing skills, detected skills, education, projects, match percentage, and role-based feedback. This project is the combination/final presentation of my AI Career Mentor work.',
-    limitations: [
-      'The current implementation depends on predefined role-skill mappings and does not represent a generalized real-time labor-market recommendation engine.',
-    ],
-    futureImprovements: [
-      'Expand role coverage',
-      'Improve skill normalization',
-      'Add richer career recommendations',
-      'Integrate current job-market data',
-      'Improve handling of longer resumes',
-      'Add evaluation datasets for extraction quality',
-    ],
+    challenges: ['Getting valid JSON from an LLM without markdown wrappers', 'Handling different ways of writing the same technology', 'Handling different resume lengths'],
+    solutions: ['Used a strict structured-output prompt', 'Applied lowercase skill normalization', 'Limited the input to the first 3000 characters'],
+    resultsOrStatus: 'Completed functional career intelligence application for supported career roles.',
+    limitations: ['Uses a predefined role-skill mapping', 'Not yet a generalized real-time labor-market recommender'],
+    futureImprovements: ['Expand supported career roles', 'Improve skill normalization', 'Add richer recommendations', 'Integrate current job-market data', 'Support longer resumes', 'Create evaluation datasets for systematic testing'],
   },
+
+  // ── 2. RAG PDF ASSISTANT ─────────────────────────────────────────────────
   {
     projectId: 'rag-pdf-assistant',
-    problem:
-      'Long documents can be difficult to search manually when users need answers from specific document content.',
-    objective:
-      'Learn and implement a Retrieval-Augmented Generation workflow for document question answering using embeddings and ChromaDB.',
+    problem: 'Users may spend significant time manually searching long PDF documents to find specific information.',
+    objective: 'Build a document-grounded question-answering system that retrieves relevant document content before generating an answer.',
     role: 'RAG / AI Project Intern',
     star: {
-      situation:
-        'Long documents can be difficult to search manually when users need answers from specific document content.',
-      task: 'Learn and implement a Retrieval-Augmented Generation workflow for document question answering using embeddings and ChromaDB.',
-      action:
-        'I worked on document processing, embeddings, and ChromaDB-based retrieval as part of the internship project. I studied the RAG pipeline, prepared document content for retrieval, converted content into embeddings, stored the resulting representations in ChromaDB, and used semantic retrieval to identify relevant context for document-based question answering.',
-      result:
-        'I implemented and documented a RAG workflow that demonstrates how document information can be retrieved semantically and used as context for question answering.',
+      situation: 'Long documents can be difficult to search manually when users need specific information quickly.',
+      task: 'During my internship, I worked on implementing a document-question-answering workflow using Retrieval-Augmented Generation.',
+      action: 'I worked on document processing, document chunking, embeddings, vector storage, semantic retrieval, and context-aware response generation. I used LangChain and ChromaDB as part of the RAG pipeline and integrated the retrieval workflow with an application interface using FastAPI and Streamlit.',
+      result: 'I implemented and documented an end-to-end RAG workflow for document-grounded question answering.',
     },
-    technologies: ['Python', 'RAG', 'Embeddings', 'ChromaDB', 'Document Processing', 'Semantic Retrieval'],
-    architecture: [
-      'Document',
-      'Text Processing',
-      'Chunking',
-      'Embeddings',
-      'ChromaDB',
-      'Similarity Retrieval',
-      'Relevant Context',
-      'Answer Generation',
-    ],
+    technologies: ['Python', 'LangChain', 'RAG', 'Embeddings', 'ChromaDB', 'Document Processing', 'Semantic Retrieval', 'FastAPI', 'Streamlit'],
+    architecture: ['Document / PDF', 'Text Processing', 'Document Chunking', 'Embeddings', 'ChromaDB', 'Similarity Retrieval', 'Relevant Context', 'Answer Generation', 'User Response'],
     workflow: [
-      'Document ingestion and text preparation',
-      'Chunking of document content',
-      'Conversion of chunks into embeddings',
-      'Storage of embeddings in ChromaDB',
-      'Semantic similarity retrieval for a user question',
-      'Construction of relevant context from retrieved chunks',
-      'Answer generation using the retrieved context',
+      'Load the document',
+      'Extract and prepare document text',
+      'Split the document into manageable chunks',
+      'Convert chunks into embeddings',
+      'Store embeddings in ChromaDB',
+      'Accept the user\'s question',
+      'Perform semantic retrieval',
+      'Retrieve relevant document chunks',
+      'Use the retrieved context for answer generation',
+      'Return the document-grounded response',
     ],
-    implementation:
-      'I prepared document content for retrieval, chunked the text, converted chunks into embeddings, stored the resulting representations in ChromaDB, and used semantic retrieval to identify relevant context for document-based question answering.',
-    aiApproach:
-      'The RAG approach retrieves relevant evidence before generation, grounds responses on document context, reduces unsupported answers, and enables document-specific question answering.',
-    promptEngineering:
-      'Prompting plays a role at the answer-generation stage, where retrieved document context is supplied to the generation process to ground the response in the source material.',
+    implementation: 'Process document content → Split content into chunks → Generate embeddings → Store embeddings in ChromaDB → Perform semantic similarity retrieval → Pass relevant content as context for answer generation → Expose the application through FastAPI and Streamlit.',
+    aiApproach: 'The project follows the Retrieval-Augmented Generation pattern, where retrieval is performed before response generation so that the generated response can be grounded in relevant document content.',
+    promptEngineering: 'The generation stage uses retrieved document context as input so that the response is based on the available document content rather than relying only on the model\'s internal knowledge.',
     inputProcessingOutput: {
       input: 'PDF / Document + User Question',
-      processing:
-        'Document ingestion \u2192 text preparation \u2192 chunking \u2192 embeddings \u2192 vector storage in ChromaDB \u2192 semantic retrieval \u2192 context construction \u2192 generation',
-      output: 'Document-grounded response',
+      processing: 'Document processing → Chunking → Embeddings → ChromaDB → Semantic retrieval → Relevant context → Answer generation',
+      output: 'Document-grounded answer',
     },
-    challenges: [
-      'Preparing document content so it can be effectively chunked and retrieved',
-      'Understanding and implementing the full RAG pipeline within the internship period',
-    ],
-    solutions: [
-      'Studied the RAG pipeline and applied it step by step: document processing, embeddings, ChromaDB storage, and semantic retrieval',
-      'Documented the workflow to reinforce understanding and enable future iteration',
-    ],
-    resultsOrStatus:
-      'I implemented and documented a RAG workflow that demonstrates how document information can be retrieved semantically and used as context for question answering.',
-    limitations: [
-      'The exact model configuration and evaluation details are not fabricated when they are not documented.',
-    ],
-    futureImprovements: [
-      'Stronger retrieval evaluation',
-      'Better chunking strategies',
-      'Retrieval-quality analysis',
-      'Richer document support',
-      'Answer evaluation',
-    ],
+    challenges: ['Processing long documents', 'Choosing useful text chunks', 'Retrieving relevant content', 'Keeping generated responses grounded in document context'],
+    solutions: ['Used document chunking', 'Used embeddings for semantic retrieval', 'Stored vectors in ChromaDB', 'Used retrieved context for answer generation'],
+    resultsOrStatus: 'Completed RAG workflow developed during my Pirai Infotech internship.',
+    limitations: ['Retrieval quality depends on document processing and chunking', 'Performance can vary depending on document structure and retrieval relevance'],
+    futureImprovements: ['Improve chunking strategies', 'Improve retrieval relevance', 'Add stronger document evaluation', 'Support larger document collections', 'Add more advanced retrieval and reranking methods'],
   },
+
+  // ── 3. AI MEMORY ASSISTANT ───────────────────────────────────────────────
   {
     projectId: 'ai-memory-assistant',
-    problem:
-      'Users often receive useful information through workplace chat but may struggle to save, find, and recall it later.',
-    objective:
-      'Build a productivity extension for Zoho Cliq that lets users save, recall, search, summarize, and manage useful information directly through chat-based interactions.',
+    problem: 'Users may lose track of useful information from workplace conversations and need a simple way to remember and retrieve it.',
+    objective: 'Build a conversational productivity assistant that provides memory storage and retrieval capabilities within Zoho Cliq.',
     role: 'Project Developer',
     star: {
-      situation:
-        'Users often receive useful information through workplace chat but may struggle to save, find, and recall it later.',
-      task: 'Build a productivity extension for Zoho Cliq that lets users save, recall, search, summarize, and manage useful information directly through chat-based interactions.',
-      action:
-        'I developed the Zoho Cliq extension with bot commands, a memory widget, webhooks, and a FastAPI backend. The backend receives requests from Cliq, processes memory operations, stores and searches memory data using JSON storage, and sends the result back to the Cliq interface. I implemented commands such as /remember, /recall, /summarize, and /forget, along with semantic smart search and a memory widget.',
-      result:
-        'The project provides a conversational memory system inside Zoho Cliq where users can save information, retrieve memories, summarize content, and manage stored items through chat commands and the widget interface.',
+      situation: 'Important information shared during workplace conversations can be difficult to save and retrieve later.',
+      task: 'I wanted to create a productivity assistant that could provide persistent conversational memory inside Zoho Cliq.',
+      action: 'I developed the assistant using the Zoho Cliq Developer Platform with a FastAPI backend. I implemented bot commands, memory operations, a memory widget, and webhook-based communication. The backend processes memory requests and stores/retrieves data using JSON storage. The main commands include /remember, /recall, /summarize, and /forget. I also implemented smart semantic matching for recall-style searches.',
+      result: 'The assistant provides persistent memory operations within Zoho Cliq and allows users to store and retrieve useful conversation information.',
     },
-    technologies: [
-      'Zoho Cliq Developer Platform',
-      'FastAPI',
-      'Render',
-      'JSON Storage',
-      'JavaScript',
-    ],
-    architecture: [
-      'Zoho Cliq Extension',
-      'Bot',
-      'Commands',
-      'Widget',
-      'Webhook',
-      'FastAPI Backend',
-      'Memory Processing',
-      'JSON Storage / Search',
-      'Response',
-      'Zoho Cliq',
-    ],
+    technologies: ['Zoho Cliq Developer Platform', 'FastAPI', 'Render', 'JSON Storage', 'JavaScript', 'Webhooks'],
+    architecture: ['Zoho Cliq Extension', 'Bot / Commands / Widget', 'Webhook', 'FastAPI Backend', 'Memory Processing', 'JSON Storage / Search', 'Response', 'Zoho Cliq'],
     workflow: [
-      'User sends a chat command in Zoho Cliq (e.g. /remember, /recall, /summarize, /forget)',
-      'Cliq sends the request through the webhook to the FastAPI backend',
-      'The backend processes the memory operation (store, retrieve, summarize, or delete)',
-      'Memory data is stored and searched using JSON storage',
-      'The result is sent back to the Zoho Cliq interface',
+      'User interacts with the assistant in Zoho Cliq',
+      'A command or widget action triggers the backend',
+      'The webhook sends the request to FastAPI',
+      'The backend identifies the requested memory operation',
+      'Data is stored, searched, summarized, or removed',
+      'JSON storage is used for persistence',
+      'The processed result is returned to Zoho Cliq',
     ],
-    implementation:
-      'I implemented bot commands (/remember, /recall, /summarize, /forget), a memory widget, webhooks, and a FastAPI backend that handles memory operations with JSON storage and smart search. The backend is deployed on Render.',
-    aiApproach:
-      'AI smart search uses semantic matching to improve recall of stored memories, helping users find relevant information even when the exact wording does not match.',
-    promptEngineering:
-      'Not a primary component of this project. Summarization is handled through the backend, but the project is not a RAG pipeline and no specific model details are claimed.',
+    implementation: 'Implemented commands: /remember, /recall, /summarize, /forget. The application also includes: bot interaction, memory widget, webhook communication, FastAPI backend, persistent JSON-based memory storage, and smart semantic-style retrieval/search.',
+    aiApproach: 'The assistant uses semantic matching for smart memory retrieval/search. AI is primarily used to make stored information easier to recall rather than as a full RAG pipeline.',
+    promptEngineering: 'Not a core component of this project.',
     inputProcessingOutput: {
-      input: 'Chat command or Memory text',
-      processing:
-        'Command handling \u2192 backend request \u2192 memory storage / retrieval / summarization \u2192 response',
-      output: 'Retrieved memory, Summary, or Confirmation inside Zoho Cliq',
+      input: 'User command / message / memory request',
+      processing: 'Command handling → Backend processing → Memory operation → JSON storage/search → Response generation',
+      output: 'Stored memory, recalled information, summarized information, or deleted memory',
     },
-    challenges: [
-      'Connecting the Zoho Cliq extension to a custom FastAPI backend through webhooks',
-      'Designing memory operations that work naturally within a chat-command interface',
-      'Deploying the backend so it stays reachable from Cliq',
-    ],
-    solutions: [
-      'Built the FastAPI backend with webhook handling and deployed it on Render',
-      'Implemented clear chat commands (/remember, /recall, /summarize, /forget) and a memory widget',
-      'Used JSON storage for memory persistence and smart search for recall',
-    ],
-    resultsOrStatus:
-      'The project provides a conversational memory system inside Zoho Cliq where users can save information, retrieve memories, summarize content, and manage stored items through chat commands and the widget interface.',
-    limitations: [
-      'Uses JSON storage rather than a dedicated vector database, so semantic search capabilities are limited compared to a full RAG implementation.',
-    ],
-    futureImprovements: [
-      'Upgrade memory storage to a vector database for stronger semantic search',
-      'Add richer summarization options',
-      'Improve daily summary scheduling',
-    ],
+    challenges: ['Maintaining persistent memory', 'Handling different memory operations', 'Connecting Zoho Cliq interactions with the backend', 'Returning clear responses to users'],
+    solutions: ['Implemented dedicated commands', 'Used FastAPI as the backend', 'Used webhook-based integration', 'Added persistent JSON storage and search logic'],
+    resultsOrStatus: 'Completed productivity assistant integration for Zoho Cliq.',
+    limitations: ['JSON storage is less scalable than a dedicated database/vector database', 'Retrieval capabilities are limited compared with advanced vector-based memory systems'],
+    futureImprovements: ['Move to a dedicated database', 'Add stronger semantic retrieval', 'Add richer memory organization', 'Improve scalability and memory management'],
   },
+
+  // ── 4. AI LEGALEASE ──────────────────────────────────────────────────────
   {
     projectId: 'ai-legalease',
-    problem:
-      'Legal documents often contain complex terminology and clauses that are difficult for non-specialist users to understand.',
-    objective:
-      'Develop an AI-assisted application that simplifies legal documents and provides accessible document analysis.',
+    problem: 'Complex legal documents may be difficult for non-expert users to interpret.',
+    objective: 'Build an AI-assisted platform that simplifies legal information and helps users understand important parts of legal documents.',
     role: 'Team Lead — Backend AI/NLP',
     star: {
-      situation:
-        'Legal documents often contain complex terminology and clauses that are difficult for non-specialist users to understand.',
-      task: 'Develop an AI-assisted application that simplifies legal documents and provides accessible document analysis.',
-      action:
-        'As Team Lead for Backend AI/NLP, I worked on the AI/NLP side of the application, focusing on processing legal-document content and supporting capabilities such as plain-language summarization, risk highlighting, multilingual support, and conversational question answering using Generative AI.',
-      result:
-        'The application provides AI-assisted legal document analysis through simplified summaries, risk indication, multilingual support, and document-related Q&A.',
+      situation: 'Legal documents can be difficult for general users to understand because of complex terminology and lengthy content.',
+      task: 'Our team aimed to build an AI-assisted solution that could make legal information easier to understand.',
+      action: 'As the Team Lead for the backend AI/NLP side, I contributed to the AI/NLP workflow, coordinated the backend-related work, and worked on legal document processing, simplified explanations, risk highlighting, multilingual support, and conversational question answering using Generative AI.',
+      result: 'The project produced an AI-assisted workflow for analyzing legal documents and presenting easier-to-understand information.',
     },
-    technologies: ['Google Cloud Generative AI', 'AI', 'NLP'],
-    architecture: [
-      'PDF / DOCX',
-      'Document Input',
-      'Text / Content Processing',
-      'Generative AI / NLP Processing',
-      'Summarization / Risk Analysis / Q&A / Language Support',
-      'User-facing Result',
-    ],
+    technologies: ['Google Cloud Generative AI', 'Generative AI', 'Natural Language Processing', 'AI'],
+    architecture: ['PDF / DOCX', 'Document Input', 'Text / Content Processing', 'Generative AI / NLP', 'Summary', 'Risk Highlighting', 'Q&A / Multilingual Processing', 'User Result'],
     workflow: [
-      'User uploads a PDF or DOCX legal document',
-      'Document content is processed and extracted',
-      'Generative AI / NLP processes the content',
-      'Summarization, risk analysis, Q&A, and multilingual support are applied',
-      'The user-facing result is returned',
+      'User provides a legal document',
+      'Document content is processed',
+      'Relevant legal text is passed to the AI/NLP workflow',
+      'The system generates a simplified summary',
+      'Important or potentially risky sections are highlighted',
+      'Users can interact through conversational question answering',
+      'Information can be presented in a more accessible format',
     ],
-    implementation:
-      'As Team Lead for Backend AI/NLP, I worked on processing legal-document content and supporting plain-language summarization, risk highlighting (Safe, Moderate, Risky), multilingual support, and conversational Q&A using Generative AI.',
-    aiApproach:
-      'The application uses Google Cloud Generative AI for NLP-based document processing, including summarization, risk categorization, multilingual support, and document-related Q&A.',
-    promptEngineering:
-      'Prompting is used to guide the Generative AI model to produce simplified summaries, classify risk levels, and answer document-related questions in accessible language.',
+    implementation: 'The project focuses on AI/NLP processing of legal documents and supports: plain-language summarization, risk highlighting, conversational Q&A, and multilingual interaction. Risk categories: Safe, Moderate, Risky.',
+    aiApproach: 'Generative AI and NLP are used to process legal text, simplify explanations, highlight potentially important sections, and support conversational question answering.',
+    promptEngineering: 'Prompts are designed to guide the Generative AI system to: simplify legal language, identify important or risky sections, answer user questions based on the document, and provide structured and understandable responses.',
     inputProcessingOutput: {
-      input: 'Legal document + User request',
-      processing: 'Document content processing \u2192 AI/NLP analysis \u2192 requested task',
-      output: 'Simplified legal information + AI-assisted analysis',
+      input: 'Legal PDF / DOCX + User Query',
+      processing: 'Document processing → NLP / Generative AI → Summarization / Risk analysis / Q&A / Language processing',
+      output: 'Simplified legal information + Risk-related insights + Conversational answers',
     },
-    challenges: [
-      'Processing legal documents with complex terminology into accessible language',
-      'Providing meaningful risk categorization without overstepping the limits of AI-assisted analysis',
-    ],
-    solutions: [
-      'Used Generative AI for plain-language summarization and risk highlighting with clear categories (Safe, Moderate, Risky)',
-      'Added multilingual support and conversational Q&A to improve accessibility',
-    ],
-    resultsOrStatus:
-      'The application provides AI-assisted legal document analysis through simplified summaries, risk indication, multilingual support, and document-related Q&A. This is AI-assisted legal document analysis, not professional legal advice.',
-    limitations: [
-      'This is AI-assisted legal document analysis and does not provide professional legal advice or guaranteed legal correctness.',
-    ],
-    futureImprovements: [
-      'Improve risk categorization accuracy',
-      'Expand multilingual coverage',
-      'Add support for more document formats',
-    ],
+    challenges: ['Complex legal terminology', 'Long and detailed documents', 'Need for understandable responses', 'Need to avoid presenting generated information as guaranteed legal advice'],
+    solutions: ['Used Generative AI and NLP', 'Focused on simplified explanations', 'Structured outputs around summaries, risks, and Q&A', 'Clearly positioned the system as AI assistance, not professional legal advice'],
+    resultsOrStatus: 'Completed AI-assisted legal document analysis solution developed as a team project.',
+    limitations: ['AI-generated information may require professional verification', 'Not a substitute for professional legal advice', 'Accuracy depends on document quality and model behavior'],
+    futureImprovements: ['Better legal-domain evaluation', 'More advanced document understanding', 'Better multilingual capabilities', 'Stronger citation and evidence mechanisms', 'Human/legal expert review workflows'],
   },
+
+  // ── 5. CIVIC CONNECT ─────────────────────────────────────────────────────
   {
     projectId: 'civic-connect',
-    problem:
-      'Citizens need a convenient way to report civic issues, while authorities need structured visibility into complaints, evidence, status, location, and resolution.',
-    objective:
-      'Build a civic issue management platform that connects citizen reporting with authority-side tracking and resolution workflows.',
+    problem: 'Citizens may face difficulties reporting civic issues and tracking their progress, while authorities need structured information to manage and resolve complaints.',
+    objective: 'Build a smart civic platform that connects issue reporting, evidence, tracking, dashboards, and resolution workflows.',
     role: 'Project Contributor',
     star: {
-      situation:
-        'Citizens need a convenient way to report civic issues, while authorities need structured visibility into complaints, evidence, status, location, and resolution.',
-      task: 'Build a civic issue management platform that connects citizen reporting with authority-side tracking and resolution workflows.',
-      action:
-        'I contributed to the development of the Civic Connect platform using React, TypeScript, Vite, Tailwind CSS, shadcn/ui, and Supabase. The platform supports issue reporting, evidence submission, complaint tracking, dashboards, location-based visualization, notifications, and AI-assisted issue categorization.',
-      result:
-        'The platform provides a structured workflow from civic issue reporting to tracking and evidence-based resolution, with dashboards and map-based visibility.',
+      situation: 'Citizens need a convenient way to report civic problems, while authorities need organized visibility into complaints and their resolution status.',
+      task: 'Our team aimed to create a digital platform connecting citizen issue reporting with structured administrative tracking.',
+      action: 'I contributed to the platform using React, TypeScript, Vite, Tailwind CSS, shadcn/ui, and Supabase. The platform supports issue reporting, evidence submission, status tracking, dashboards, map-based visibility, notifications, and AI-assisted issue categorization.',
+      result: 'The platform provides a structured reporting-to-resolution workflow for civic issues.',
     },
-    technologies: [
-      'React',
-      'TypeScript',
-      'Vite',
-      'Tailwind CSS',
-      'shadcn/ui',
-      'Supabase',
-      'PostgreSQL',
-      'Recharts',
-      'Lucide React',
-      'Vitest',
-    ],
-    architecture: [
-      'Citizen / Officer',
-      'React + TypeScript Frontend',
-      'Supabase',
-      'PostgreSQL',
-      'Authentication / Storage',
-      'Dashboard / Tracking / Map / Notifications',
-    ],
+    technologies: ['React.js', 'Vite', 'TypeScript', 'Tailwind CSS', 'shadcn/ui', 'Supabase', 'PostgreSQL', 'Supabase Auth', 'Supabase Storage', 'Recharts', 'Lucide React', 'Vitest'],
+    architecture: ['Citizen / Officer', 'React + TypeScript Frontend', 'Supabase', 'PostgreSQL', 'Authentication / Storage', 'Dashboard / Tracking / Map / Notifications', 'Issue Resolution Workflow'],
     workflow: [
-      'A citizen raises a complaint with AI-assisted categorization',
-      'Complaint progress is tracked from Pending to Resolved in real time',
-      'Workers provide video proof of completion to close tasks',
-      'Officers manage resources and priorities through a smart dashboard',
-      'An interactive map provides location-based issue visualization',
-      'Notifications update users and workers when task status changes',
+      'Citizen reports a civic issue',
+      'Relevant evidence and location information are submitted',
+      'The issue is categorized',
+      'The issue is stored in the backend',
+      'Authorities can review and track the issue',
+      'Dashboards provide structured visibility',
+      'Status and progress can be tracked',
+      'Notifications support communication around the issue',
     ],
-    implementation:
-      'I contributed to the frontend built with React, TypeScript, Vite, Tailwind CSS, and shadcn/ui, with Supabase for backend, PostgreSQL, authentication, and storage. The platform includes automated issue reporting with AI-assisted categorization, real-time tracking, evidence-based resolution, a smart dashboard, an interactive map, and a notification system.',
-    aiApproach:
-      'The AI component provides AI-assisted issue categorization to help structure citizen complaints. No specific AI model or API is claimed unless verified in the source.',
-    promptEngineering:
-      'Not a primary component of this project.',
+    implementation: 'The application includes: citizen issue reporting, evidence upload, issue tracking, location/map visibility, dashboard views, notifications, and AI-assisted issue categorization.',
+    aiApproach: 'AI-assisted issue categorization is included as part of the platform workflow.',
+    promptEngineering: 'Not a core documented component of this project.',
     inputProcessingOutput: {
-      input: 'Citizen complaint + evidence + location',
-      processing:
-        'Issue reporting with AI-assisted categorization \u2192 tracking \u2192 evidence submission \u2192 dashboard management \u2192 notification',
-      output: 'Tracked, evidence-based civic issue resolution with map and dashboard visibility',
+      input: 'Citizen complaint + Evidence + Location',
+      processing: 'Issue submission → Categorization → Storage → Tracking → Dashboard → Notification',
+      output: 'Structured civic issue record with tracking and resolution visibility',
     },
-    challenges: [
-      'Building a structured workflow that connects citizen reporting with authority-side resolution',
-      'Integrating real-time tracking, evidence submission, and map-based visualization in one platform',
-    ],
-    solutions: [
-      'Used React, TypeScript, and Supabase to build a connected citizen-officer workflow',
-      'Implemented real-time tracking, evidence-based closure, dashboards, and interactive maps',
-    ],
-    resultsOrStatus:
-      'The platform provides a structured workflow from civic issue reporting to tracking and evidence-based resolution, with dashboards and map-based visibility.',
-    limitations: [
-      'The AI-assisted categorization component does not replace manual review by authorities.',
-    ],
-    futureImprovements: [
-      'Expand AI-assisted categorization coverage',
-      'Add analytics for civic issue trends',
-      'Improve notification delivery',
-    ],
+    challenges: ['Organizing civic complaints', 'Managing evidence and location', 'Providing useful visibility to authorities', 'Connecting frontend and backend workflows'],
+    solutions: ['Used React/TypeScript for the frontend', 'Used Supabase for backend services, authentication, storage, and database functionality', 'Added structured issue tracking and dashboard functionality'],
+    resultsOrStatus: 'Completed smart civic issue management platform.',
+    limitations: ['AI categorization capabilities depend on the implemented AI workflow', 'Real-world deployment would require integration with actual civic authorities and services'],
+    futureImprovements: ['Stronger AI-based categorization', 'Improved map intelligence', 'Priority/severity prediction', 'Better authority-side analytics', 'Real-world civic system integration'],
   },
+
+  // ── 6. SIH RETAIL INTELLIGENCE ───────────────────────────────────────────
   {
     projectId: 'retail-intelligence',
-    problem:
-      'Retail stores can face operational issues such as stock-outs, shelf-management problems, customer congestion, and limited visibility into customer movement, especially in environments with constrained connectivity.',
-    objective:
-      'Develop an edge-AI retail intelligence platform that converts camera-based retail signals into actionable operational insights.',
-    role: 'Team Member — Smart India Hackathon 2026 PS 179',
+    problem: 'Retail stores need better visibility into customer movement, shelf availability, queue congestion, and operational patterns. The solution also needs to consider privacy, low latency, and constrained connectivity.',
+    objective: 'Develop an edge-AI retail intelligence platform that converts camera observations into useful business insights and actionable store operations.',
+    role: 'Team Lead — AI/ML & System Coordination',
     star: {
-      situation:
-        'Retail stores can face operational issues such as stock-outs, shelf-management problems, customer congestion, and limited visibility into customer movement, especially in environments with constrained connectivity.',
-      task: 'Develop an edge-AI retail intelligence platform that converts camera-based retail signals into actionable operational insights.',
-      action:
-        'I am currently working on the project architecture and prototype. The planned system processes retail camera input locally using edge AI, extracts operational signals such as customer traffic, dwell time, shelf visibility, and queue conditions, and converts those signals into actionable insights for retailers.',
-      result:
-        'The project is currently under development. The target outcome is a retail intelligence system that can provide local, low-latency operational insights while reducing dependence on cloud connectivity.',
+      situation: 'Neighborhood stores, supermarkets, pharmacies, and larger retail environments can face operational issues such as stock-outs, shelf-management problems, long billing queues, and limited visibility into customer movement and engagement — especially in environments with constrained internet connectivity.',
+      task: 'Our team is developing an AI-powered retail intelligence platform that converts camera-based observations into actionable operational insights while keeping inference close to the store environment.',
+      action: 'As the Team Lead, I coordinate the overall project development, divide tasks among team members, guide the AI/ML and technical approach, review implementation progress, integrate different modules, and ensure that the solution stays aligned with SIH Problem Statement 179. I contribute to the system architecture, solution design, technical discussions, prototype integration, testing, documentation, and presentation preparation.',
+      result: 'The project is currently under development, with the team refining the proposed edge-AI retail intelligence workflow and prototype.',
     },
     technologies: ['Computer Vision', 'Edge AI', 'Real-Time AI', 'Retail Analytics'],
-    architecture: [
-      'Camera / Video Input',
-      'Edge / On-Device Computer Vision',
-      'Signal Extraction',
-      'Intelligence / Risk Analysis',
-      'Actionable Insight',
-      'Retailer Action',
-    ],
+    architecture: ['Camera / Video Input', 'Edge / On-Device Computer Vision', 'Signal Extraction', 'Operational Intelligence / Risk Detection', 'Actionable Insight', 'Retailer Action'],
     workflow: [
-      'Retail camera feed is captured',
-      'Edge / on-device computer vision processes the feed locally',
-      'Operational signals are extracted (customer traffic, dwell, shelf visibility, queue)',
-      'Intelligence / risk analysis converts signals into insights',
-      'Actionable insights are delivered to the retailer',
+      'Camera/video data is captured from the retail environment',
+      'Computer vision processing analyzes relevant visual signals',
+      'The system extracts operational signals such as shelf conditions, queue growth, and customer movement patterns',
+      'Signals are converted into higher-level retail insights or risks',
+      'Insights are presented as actionable information for store operations',
+      'The design emphasizes local/edge processing to reduce cloud dependency and latency',
     ],
-    implementation:
-      'Architecture and prototype are currently under development. No completed implementation, final hardware, final model, final dataset, final accuracy, FPS, completed deployment, or benchmark is claimed.',
-    aiApproach:
-      'The planned edge-AI approach uses local processing for low latency, reduced cloud dependency, privacy-conscious handling of camera data, and suitability for constrained-connectivity retail environments. Planned intelligence areas include customer traffic patterns, customer dwell / engagement, out-of-stock product detection, shelf compliance, queue congestion prediction, and retail operational insights.',
-    promptEngineering:
-      'Not a primary component of this project.',
+    implementation: 'The project is currently being developed as a prototype. Focus areas: customer traffic patterns, dwell-time insights, out-of-stock product detection, shelf compliance, queue congestion prediction, edge/on-device inference, low-latency processing, privacy-conscious processing, and reduced dependency on continuous cloud connectivity.',
+    aiApproach: 'The proposed system uses computer vision and edge AI to process retail-camera data close to the source and convert visual signals into operational insights. Core concept: SIGNAL → INSIGHT → ACTION.',
+    promptEngineering: 'Not a core component of this computer-vision system.',
     inputProcessingOutput: {
-      input: 'Retail camera feed',
-      processing:
-        'Edge processing \u2192 computer vision \u2192 signal extraction \u2192 intelligence / risk analysis \u2192 actionable insight',
-      output: 'Stock-out risk, Queue congestion insight, Customer traffic / dwell insight, Retail operational action',
+      input: 'Retail camera / video stream',
+      processing: 'Edge computer vision → Signal extraction → Risk / pattern analysis → Retail intelligence',
+      output: 'Stock-out insight + Queue congestion insight + Customer traffic/dwell insight + Shelf-related insight + Actionable retail recommendation',
     },
-    challenges: [
-      'Designing an architecture that works in connectivity-constrained retail environments',
-      'Converting raw camera signals into meaningful operational insights',
-    ],
-    solutions: [
-      'Planned an edge-AI architecture that processes camera feeds locally to reduce cloud dependency',
-      'Defined a Signal \u2192 Insight \u2192 Action concept to map raw signals to retailer actions',
-    ],
-    resultsOrStatus:
-      'No final results or performance metrics are claimed because the project is currently under development.',
-    limitations: [
-      'Final implementation, hardware, models, and benchmark evaluation are still under development.',
-    ],
-    futureImprovements: [
-      'Finalize implementation decisions as development progresses',
-    ],
+    challenges: ['Operating with constrained connectivity', 'Achieving low-latency analysis', 'Protecting privacy', 'Converting raw visual signals into useful business insights', 'Integrating multiple retail intelligence modules'],
+    solutions: ['Proposed edge/on-device inference', 'Local signal processing', 'Structured SIGNAL → INSIGHT → ACTION workflow', 'Modular system design'],
+    resultsOrStatus: 'Ongoing — currently developing and refining the prototype and integrating the proposed AI-powered retail intelligence modules.',
+    limitations: ['Prototype is still under development', 'Final hardware and model configuration are not yet finalized', 'Final performance benchmarks are not yet available'],
+    futureImprovements: ['Complete prototype implementation', 'Finalize edge hardware', 'Improve real-time detection', 'Add stronger retail analytics', 'Evaluate system performance', 'Improve store-level recommendations', 'Extend deployment for different retail environments'],
   },
+
+  // ── 7. ACCIDENT DETECTION ────────────────────────────────────────────────
   {
     projectId: 'accident-detection',
-    problem:
-      'Accident-related incidents on roads can require timely identification so that people can become aware of potentially hazardous situations sooner.',
-    objective:
-      'Develop an AI-based computer vision system for detecting accident-related events from visual input.',
-    role: 'Final-Year Project Team Member',
+    problem: 'Accident-related events need to be recognized from visual information in a timely manner.',
+    objective: 'Develop an AI-based computer vision system capable of identifying accident-related events from video/visual input.',
+    role: 'Team Lead — AI/ML & Project Coordination',
     star: {
-      situation:
-        'Accident-related incidents on roads can require timely identification so that people can become aware of potentially hazardous situations sooner.',
-      task: 'Develop an AI-based computer vision system for detecting accident-related events from visual input.',
-      action:
-        'I am currently working as part of the final-year project team on the development of the accident-detection system. The implementation is still in progress, including the model, dataset, evaluation, and final system workflow.',
-      result:
-        'The project is currently under development. No final accuracy or benchmark is claimed at this stage.',
+      situation: 'Accident-related events require timely identification from visual information so that the relevant event can be recognized as quickly as possible.',
+      task: 'Our team is developing an AI-based computer vision system for accident-related event detection.',
+      action: 'As the Team Lead, I oversee the overall project development and coordinate the team throughout implementation. I define the project workflow, distribute responsibilities, contribute to AI/ML and system-design decisions, review the work completed by team members, coordinate module integration, and handle technical discussions, documentation, testing coordination, review preparation, and project presentation.',
+      result: 'The project is currently under development, with the team working on the proposed accident-detection workflow and system implementation.',
     },
     technologies: ['Computer Vision', 'Deep Learning', 'Real-Time AI'],
-    architecture: [
-      'Visual Input',
-      'Computer Vision Processing',
-      'Accident / Event Detection',
-      'Result / Alert Workflow',
-    ],
+    architecture: ['Visual / Video Input', 'Computer Vision Processing', 'Accident / Event Detection', 'Detection Result', 'Alert / Response Workflow'],
     workflow: [
-      'Visual / video input is captured',
-      'Computer vision processing analyzes the input',
-      'Accident / event detection is performed',
-      'A detection result or alert workflow is produced',
+      'Receive visual/video input',
+      'Process the input using computer vision techniques',
+      'Analyze the visual information for accident-related patterns',
+      'Perform event detection',
+      'Generate the detection result',
+      'Connect the result to the intended response/alert workflow as development progresses',
     ],
-    implementation:
-      'Computer-vision and deep-learning based accident detection approach under development. Model, dataset, evaluation, and deployment are not finalized.',
-    aiApproach:
-      'A computer-vision and deep-learning based accident detection approach is under development. No specific model name, dataset, accuracy, precision, recall, FPS, deployment, or alert API is claimed unless it exists in actual project documentation.',
-    promptEngineering:
-      'Not a primary component of this project.',
+    implementation: 'The system is currently under development. Focus areas: video/visual input processing, computer vision, deep learning-based event detection, real-time processing direction, and team-based system integration.',
+    aiApproach: 'The project uses computer vision and deep learning as the technical direction for accident-related event detection.',
+    promptEngineering: 'Not a core component of this project.',
     inputProcessingOutput: {
-      input: 'Visual / video input',
-      processing: 'Computer vision \u2192 accident / event analysis \u2192 detection',
-      output: 'Detection result / alert workflow',
+      input: 'Video / Visual Input',
+      processing: 'Computer vision preprocessing → Feature/event analysis → Accident-related event detection',
+      output: 'Detected event / Detection result',
     },
-    challenges: [
-      'Identifying accident-related events reliably from visual input',
-      'Building a model and evaluation pipeline that is still under development',
-    ],
-    solutions: [
-      'Currently working on the computer-vision and deep-learning approach as part of the final-year project team',
-    ],
-    resultsOrStatus:
-      'No final results or performance metrics are claimed at this stage because the project is under development.',
-    limitations: [
-      'Implementation and evaluation are ongoing. Model, dataset, evaluation, and deployment are not finalized.',
-    ],
-    futureImprovements: [
-      'Complete model development',
-      'Dataset evaluation',
-      'Benchmarking',
-      'Real-time testing',
-      'Final deployment workflow',
-    ],
+    challenges: ['Real-time visual processing', 'Correctly identifying accident-related events', 'Coordinating multiple modules in a team project', 'Balancing detection reliability and processing requirements'],
+    solutions: ['Use a structured computer vision workflow', 'Coordinate module development across the team', 'Perform iterative integration and testing', 'Review system behavior during development'],
+    resultsOrStatus: 'Ongoing — the project is under development.',
+    limitations: ['Final model and dataset are still under development', 'Final performance metrics are not yet available', 'Real-world deployment is not yet completed'],
+    futureImprovements: ['Finalize the detection model', 'Train and evaluate with suitable datasets', 'Improve real-time performance', 'Evaluate precision/recall and related metrics', 'Improve robustness across different environments', 'Complete deployment and response integration'],
   },
+
+  // ── 8. VISIONBOT ─────────────────────────────────────────────────────────
   {
     projectId: 'visionbot',
-    problem:
-      'A robot needs a way to visually identify where a person is located and orient itself toward that person.',
-    objective:
-      'Build a computer-vision and robotics system that detects a person\u2019s face through a webcam and uses the detected position to control servo movement.',
+    problem: 'The robot needed a way to visually detect a person and orient itself toward the detected face.',
+    objective: 'Use computer vision and embedded control to create a responsive gaze/orientation mechanism for a humanoid robot.',
     role: 'AI / Computer Vision / Integration',
     star: {
-      situation:
-        'A robot needs a way to visually identify where a person is located and orient itself toward that person.',
-      task: 'Build a computer-vision and robotics system that detects a person\u2019s face through a webcam and uses the detected position to control servo movement.',
-      action:
-        'I worked on the AI/computer-vision and system integration side. I used Python and OpenCV with Haar Cascade face detection to identify a face in the webcam feed and obtain its X/Y position. I mapped the detected coordinates into servo-control values and transmitted those values through serial communication to an Arduino Uno, which controlled the servo motors.',
-      result:
-        'The VisionBot system can detect a face from the webcam and use the detected position to control servo movement so that the robot can orient toward the detected face.',
+      situation: 'A human-interaction robot needs to visually identify where a person is located and orient its head accordingly.',
+      task: 'During my robotics internship, I worked on integrating computer vision with Arduino-controlled servo movement for a humanoid robotic head.',
+      action: 'I used Python and OpenCV with Haar Cascade face detection to detect a face from webcam input. I extracted the face position using X/Y coordinates, mapped those coordinates to servo movement values, and sent the control information through serial communication to an Arduino Uno, which controlled the servo motors responsible for the robot\'s movement.',
+      result: 'The system enabled detected face positions to drive servo-based head/eye movement for human-robot interaction.',
     },
-    technologies: ['Python', 'OpenCV', 'Haar Cascade', 'Arduino Uno', 'Serial Communication', 'Servo Motors'],
-    architecture: [
-      'Webcam',
-      'Python',
-      'OpenCV',
-      'Haar Cascade Face Detection',
-      'Face X/Y Coordinates',
-      'Coordinate Mapping',
-      'Serial Communication',
-      'Arduino Uno',
-      'Servo Motors',
-      'Robot Orientation',
-    ],
+    technologies: ['Python', 'OpenCV', 'Haar Cascade', 'Arduino Uno', 'Serial Communication', 'Servo Motors', 'Webcam'],
+    architecture: ['Webcam', 'Python', 'OpenCV', 'Haar Cascade Face Detection', 'Face X/Y Coordinates', 'Coordinate Mapping', 'Serial Communication', 'Arduino Uno', 'Servo Motors', 'Robot Orientation'],
     workflow: [
-      'Webcam captures live frames',
-      'Python and OpenCV process the frames',
-      'Haar Cascade face detection identifies the face and its X/Y position',
-      'The detected position is mapped to servo-control values',
-      'Values are transmitted through serial communication to the Arduino Uno',
-      'The Arduino Uno drives the servo motors to orient the robot',
+      'Webcam captures the video stream',
+      'Python receives the video frames',
+      'OpenCV processes the frames',
+      'Haar Cascade detects the face',
+      'Face coordinates are identified',
+      'The coordinates are mapped to servo movement values',
+      'The movement values are sent through serial communication',
+      'Arduino Uno receives the commands',
+      'Servo motors move the robot accordingly',
     ],
-    implementation:
-      'I implemented the Python/OpenCV face detection pipeline using Haar Cascade, mapped the detected face coordinates to servo-control values, and established serial communication between Python and the Arduino Uno to drive the servo motors.',
-    aiApproach:
-      'OpenCV processes webcam frames and Haar Cascade is used to detect the face and obtain its position. The detected face position provides X/Y information that is mapped to servo-control values.',
-    promptEngineering:
-      'Not a primary component of this project.',
+    implementation: 'Webcam-based video capture → Haar Cascade face detection → Face position extraction → X/Y coordinate processing → Coordinate-to-servo mapping → Serial communication → Arduino-based servo control.',
+    aiApproach: 'This project uses classical computer vision rather than deep learning. Haar Cascade is used for face detection.',
+    promptEngineering: 'Not applicable. This is a computer vision and embedded-system integration project.',
     inputProcessingOutput: {
-      input: 'Live webcam frames',
-      processing: 'Face detection \u2192 face coordinates \u2192 coordinate mapping \u2192 serial transmission',
-      output: 'Arduino-controlled servo movement that orients the robot toward the detected face',
+      input: 'Webcam video',
+      processing: 'Frame capture → OpenCV → Haar Cascade → Face coordinates → Coordinate mapping → Arduino control',
+      output: 'Servo-controlled robot orientation toward the detected face',
     },
-    challenges: [
-      'Real-time face detection from a webcam feed',
-      'Converting image coordinates into servo movement',
-      'Communication between Python and Arduino',
-    ],
-    solutions: [
-      'Implemented the Python/OpenCV detection pipeline and serial communication workflow to connect visual detection with physical servo control',
-    ],
-    resultsOrStatus:
-      'The VisionBot system can detect a face from the webcam and use the detected position to control servo movement so that the robot can orient toward the detected face.',
-    limitations: [
-      'Uses Haar Cascade, which is less robust than deep-learning-based detectors in challenging lighting or angles.',
-    ],
-    futureImprovements: [
-      'Explore more robust face detection methods',
-      'Add tracking for smoother servo movement',
-      'Support multiple faces',
-    ],
+    challenges: ['Connecting vision output with hardware movement', 'Mapping face coordinates to servo movement', 'Maintaining responsive real-time interaction', 'Debugging serial communication and hardware calibration'],
+    solutions: ['Used coordinate mapping between camera position and servo movement', 'Used serial communication between Python and Arduino', 'Performed hardware calibration and debugging'],
+    resultsOrStatus: 'Completed during my AI and Robotics internship at iHub Robotics / Akshaya College Incubation Lab from 21 May 2025 to 6 June 2025.',
+    limitations: ['Classical Haar Cascade detection can be affected by lighting, pose, and visual conditions', 'Servo movement is dependent on calibration and hardware constraints'],
+    futureImprovements: ['More robust face detection', 'Improved tracking', 'Better servo calibration', 'Smoother movement control', 'More advanced human-robot interaction capabilities'],
   },
 ];

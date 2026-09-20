@@ -7,10 +7,21 @@ import { PromptEngineering } from '@/sections/PromptEngineering';
 import { Projects } from '@/sections/Projects';
 import { Experience } from '@/sections/Experience';
 import { Education } from '@/sections/Education';
+import { Achievements } from '@/sections/Achievements';
 import { Certifications } from '@/sections/Certifications';
 import { Resume } from '@/sections/Resume';
 import { Contact } from '@/sections/Contact';
 import { Footer } from '@/sections/Footer';
+
+const NAV_HEIGHT = 72; // px — matches h-16 (64px) + small buffer
+
+/** Smooth-scroll to a section, accounting for the fixed navbar height. */
+function scrollToSection(id: string) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const top = el.getBoundingClientRect().top + window.scrollY - NAV_HEIGHT;
+  window.scrollTo({ top, behavior: 'smooth' });
+}
 
 export default function App() {
   const [activeProjectId, setActiveProjectId] = useState<string | null>(null);
@@ -23,11 +34,7 @@ export default function App() {
     setActiveProjectId(null);
   }, []);
 
-  const scrollTo = useCallback((id: string) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, []);
-
+  // Keyboard: Escape closes the modal
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') closeProject();
@@ -36,10 +43,20 @@ export default function App() {
     return () => window.removeEventListener('keydown', onKey);
   }, [closeProject]);
 
+  // Lock body scroll when modal is open WITHOUT causing layout shift.
+  // We compensate for the scrollbar width so content doesn't jump.
   useEffect(() => {
-    document.body.style.overflow = activeProjectId ? 'hidden' : '';
+    if (activeProjectId) {
+      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+      document.body.style.overflow = 'hidden';
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
+    } else {
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
+    }
     return () => {
       document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
     };
   }, [activeProjectId]);
 
@@ -47,7 +64,7 @@ export default function App() {
     <div className="relative min-h-screen bg-ink-950 text-slate-200">
       <Navbar />
       <main>
-        <Hero onViewProjects={() => scrollTo('projects')} />
+        <Hero onViewProjects={() => scrollToSection('projects')} />
         <About />
         <Skills />
         <PromptEngineering />
@@ -58,6 +75,7 @@ export default function App() {
         />
         <Experience />
         <Education />
+        <Achievements />
         <Certifications />
         <Resume />
         <Contact />

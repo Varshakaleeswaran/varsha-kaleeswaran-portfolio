@@ -5,24 +5,31 @@ import { GlassCard } from '@/components/GlassCard';
 const links = [
   {
     label: 'Email',
-    value: 'varshakaleeswaran@gmail.com',
-    href: 'mailto:varshakaleeswaran@gmail.com',
+    value: 'kaleeswaranvarsha@gmail.com',
+    href: 'mailto:kaleeswaranvarsha@gmail.com',
     icon: 'Mail' as const,
     accent: 'text-accent-blue',
+  },
+  {
+    label: 'Phone',
+    value: '+91 8526776902',
+    href: 'tel:+918526776902',
+    icon: 'Send' as const,
+    accent: 'text-accent-cyan',
   },
   {
     label: 'LinkedIn',
     value: 'in/varsha-kaleeswaran',
     href: 'https://www.linkedin.com/in/varsha-kaleeswaran-2b2b2a273/',
     icon: 'Linkedin' as const,
-    accent: 'text-accent-cyan',
+    accent: 'text-accent-violet',
   },
   {
     label: 'GitHub',
     value: 'github.com/Varshakaleeswaran',
     href: 'https://github.com/Varshakaleeswaran',
     icon: 'Github' as const,
-    accent: 'text-accent-violet',
+    accent: 'text-accent-blue',
   },
 ];
 
@@ -34,7 +41,7 @@ export function Contact() {
       title="Let's talk AI."
       description="Open to AI/ML, Generative AI, and Prompt Engineering opportunities. Feel free to reach out through LinkedIn, GitHub, or email."
     >
-      <div className="grid gap-4 sm:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {links.map((link) => (
           <a
             key={link.label}

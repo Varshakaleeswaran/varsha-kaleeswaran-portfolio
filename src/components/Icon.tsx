@@ -95,11 +95,13 @@ export function Icon({
   name,
   className,
   strokeWidth = 1.75,
+  'aria-hidden': ariaHidden,
 }: {
   name: IconName;
   className?: string;
   strokeWidth?: number;
+  'aria-hidden'?: boolean | 'true' | 'false';
 }) {
   const Cmp = icons[name] ?? Sparkles;
-  return <Cmp className={className} strokeWidth={strokeWidth} />;
+  return <Cmp className={className} strokeWidth={strokeWidth} aria-hidden={ariaHidden} />;
 }

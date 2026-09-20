@@ -22,7 +22,7 @@ export function Experience() {
       id="experience"
       label="Experience"
       title="Internships and technical experience."
-      description="A timeline of relevant internships, hackathon projects, and technical programs across RAG, LLM applications, computer vision, and AI engineering."
+      description="Relevant internships across AI/ML, Generative AI, RAG, Computer Vision, and robotics."
     >
       <ol className="relative border-l border-white/[0.08] pl-6 sm:pl-8">
         {experience.map((item) => {

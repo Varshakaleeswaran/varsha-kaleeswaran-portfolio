@@ -28,8 +28,8 @@ export function Resume() {
         <Button
           size="lg"
           variant="primary"
-          href="/resume/Varsha_Kaleeswaran_Resume.pdf"
-          download
+          href="/Varsha_Kaleeswaran_Resume.pdf"
+          download="Varsha_Kaleeswaran_Resume.pdf"
         >
           <Icon name="Download" className="h-4 w-4" />
           Download Resume

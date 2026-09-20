@@ -129,8 +129,10 @@ export interface EducationItem {
 
 export interface Certification {
   id: string;
-  title: string;
+  name: string;
   issuer: string;
-  date: string;
-  icon: IconName;
+  issued: string;
+  credentialId?: string;
+  credentialUrl?: string;
+  type?: string;
 }

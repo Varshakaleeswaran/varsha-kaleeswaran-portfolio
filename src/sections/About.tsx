@@ -7,17 +7,17 @@ const pillars = [
   {
     icon: 'Target' as IconName,
     title: 'Practical AI Systems',
-    body: 'Focused on building intelligent applications that solve real problems across Generative AI, RAG, NLP, and Computer Vision.',
+    body: 'Building intelligent applications across Generative AI, RAG, Prompt Engineering, NLP, and Computer Vision — focused on real-world usefulness.',
   },
   {
     icon: 'Workflow' as IconName,
-    title: 'End-to-End Ownership',
-    body: 'From prompt design and RAG pipelines to FastAPI backends, Streamlit interfaces, and embedded integration.',
+    title: 'Practical System Integration',
+    body: 'From prompt design and RAG pipelines to FastAPI backends, Streamlit interfaces, and embedded hardware integration.',
   },
   {
-    icon: 'Lightbulb' as IconName,
-    title: 'Prompt Engineering',
-    body: 'Special interest in instruction design, structured outputs, context engineering, and hallucination reduction.',
+    icon: 'Users' as IconName,
+    title: 'Team Leadership',
+    body: 'Leading final-year and hackathon projects — coordinating teams, distributing tasks, driving technical direction, and managing delivery.',
   },
 ];
 
@@ -26,8 +26,8 @@ export function About() {
     <Section
       id="about"
       label="About"
-      title="B.Tech AI &amp; Data Science student building practical AI applications."
-      description="I'm Varsha Kaleeswaran, a B.Tech Artificial Intelligence & Data Science student focused on building practical AI applications across Generative AI, Prompt Engineering, LLM applications, RAG, NLP, and Computer Vision. My projects include AI-powered career intelligence, document-based question answering, AI memory systems, legal document assistance, civic-tech applications, retail intelligence, accident detection, and computer-vision robotics."
+      title="Final-year B.Tech AI & Data Science student building practical AI applications."
+      description="I'm Varsha Kaleeswaran, a final-year B.Tech Artificial Intelligence & Data Science student at P.A. College of Engineering and Technology (Anna University). I work across Generative AI, Prompt Engineering, LLM applications, RAG, NLP, Computer Vision, and real-time AI. My projects span AI-powered career intelligence, document-based question answering, AI memory systems, legal document assistance, civic-tech platforms, retail intelligence, accident detection, and computer-vision robotics."
     >
       <div className="grid gap-4 sm:grid-cols-3">
         {pillars.map((p) => (

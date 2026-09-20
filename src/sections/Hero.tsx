@@ -5,7 +5,7 @@ export function Hero({ onViewProjects }: { onViewProjects: () => void }) {
   return (
     <section
       id="home"
-      className="relative flex min-h-[100svh] items-center overflow-hidden px-5 pt-24 sm:px-8"
+      className="relative flex min-h-screen items-center overflow-hidden px-5 pt-24 sm:px-8 [min-height:100svh]"
     >
       <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
         <div className="absolute inset-0 bg-grid-faint bg-grid [mask-image:radial-gradient(ellipse_at_top,black_10%,transparent_70%)]" />
@@ -52,8 +52,8 @@ export function Hero({ onViewProjects }: { onViewProjects: () => void }) {
             <Button
               size="lg"
               variant="outline"
-              href="/resume/Varsha_Kaleeswaran_Resume.pdf"
-              download
+              href="/Varsha_Kaleeswaran_Resume.pdf"
+              download="Varsha_Kaleeswaran_Resume.pdf"
             >
               <Icon name="Download" className="h-4 w-4" />
               Download Resume
