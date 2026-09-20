@@ -9,7 +9,7 @@ export function Resume() {
       id="resume"
       label="Resume"
       title="Resume."
-      description="A prominent download is available below. The resume file is a placeholder for now — replace it with the final PDF when ready."
+      description="My latest resume covering my AI/ML, Generative AI, Prompt Engineering, RAG, NLP, and Computer Vision experience."
     >
       <GlassCard accent="blue" className="flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-4">
@@ -21,7 +21,7 @@ export function Resume() {
               Varsha Kaleeswaran — Resume
             </h3>
             <p className="mt-1 text-sm text-slate-400">
-              PDF download. Placeholder file in place until the final resume is provided.
+              My latest resume covering my AI/ML, Generative AI, Prompt Engineering, RAG, NLP, and Computer Vision experience.
             </p>
           </div>
         </div>

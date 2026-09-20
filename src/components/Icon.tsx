@@ -37,6 +37,10 @@ import {
   CheckCircle2,
   AlertTriangle,
   Rocket,
+  Store,
+  Users,
+  Clock,
+  Zap,
   type LucideIcon,
 } from 'lucide-react';
 
@@ -81,6 +85,10 @@ const icons: Record<IconName, LucideIcon> = {
   CheckCircle2,
   AlertTriangle,
   Rocket,
+  Store,
+  Users,
+  Clock,
+  Zap,
 };
 
 export function Icon({

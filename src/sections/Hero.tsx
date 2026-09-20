@@ -1,17 +1,12 @@
 import { Button } from '@/components/Button';
 import { Icon } from '@/components/Icon';
 
-export function Hero({
-  onViewProjects,
-}: {
-  onViewProjects: () => void;
-}) {
+export function Hero({ onViewProjects }: { onViewProjects: () => void }) {
   return (
     <section
       id="home"
       className="relative flex min-h-[100svh] items-center overflow-hidden px-5 pt-24 sm:px-8"
     >
-      {/* Background layers */}
       <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
         <div className="absolute inset-0 bg-grid-faint bg-grid [mask-image:radial-gradient(ellipse_at_top,black_10%,transparent_70%)]" />
         <div className="absolute left-1/2 top-[-12rem] h-[34rem] w-[34rem] -translate-x-1/2 rounded-full bg-accent-blue/10 blur-[120px] animate-pulse-slow" />
@@ -53,9 +48,6 @@ export function Hero({
             <Button size="lg" variant="primary" onClick={onViewProjects}>
               View Projects
               <Icon name="ArrowRight" className="h-4 w-4" />
-            </Button>
-            <Button size="lg" variant="secondary" onClick={onViewProjects}>
-              Technical Details
             </Button>
             <Button
               size="lg"

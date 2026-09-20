@@ -2,14 +2,14 @@ import type { SkillGroup } from './types';
 
 export const skillGroups: SkillGroup[] = [
   {
-    category: 'Generative AI & LLMs',
+    category: 'Generative AI & LLM',
     icon: 'Sparkles',
     accent: 'violet',
     skills: [
       { name: 'Generative AI' },
       { name: 'LLM Applications' },
       { name: 'Prompt Engineering' },
-      { name: 'RAG (Retrieval-Augmented Generation)' },
+      { name: 'RAG' },
     ],
   },
   {
@@ -28,51 +28,32 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
   {
-    category: 'RAG & Semantic Search',
+    category: 'Retrieval & NLP',
     icon: 'Database',
     accent: 'blue',
     skills: [
-      { name: 'RAG Pipelines' },
+      { name: 'RAG' },
       { name: 'Embeddings' },
+      { name: 'Vector Search' },
       { name: 'ChromaDB' },
-      { name: 'Semantic Retrieval' },
+      { name: 'NLP' },
       { name: 'Document Processing' },
+      { name: 'Semantic Retrieval' },
     ],
-  },
-  {
-    category: 'Machine Learning',
-    icon: 'Brain',
-    accent: 'violet',
-    skills: [
-      { name: 'Machine Learning' },
-      { name: 'Model Evaluation' },
-      { name: 'Feature Engineering' },
-    ],
-  },
-  {
-    category: 'Deep Learning',
-    icon: 'Layers',
-    accent: 'blue',
-    skills: [
-      { name: 'Deep Learning' },
-      { name: 'Neural Networks' },
-      { name: 'Real-Time Inference' },
-    ],
-  },
-  {
-    category: 'NLP',
-    icon: 'Languages',
-    accent: 'cyan',
-    skills: [{ name: 'Natural Language Processing' }],
   },
   {
     category: 'Computer Vision',
     icon: 'Eye',
     accent: 'violet',
-    skills: [{ name: 'OpenCV' }, { name: 'YOLO' }, { name: 'Haar Cascade' }],
+    skills: [
+      { name: 'Computer Vision' },
+      { name: 'OpenCV' },
+      { name: 'Haar Cascade' },
+      { name: 'YOLO' },
+    ],
   },
   {
-    category: 'Languages & Frameworks',
+    category: 'Programming & Tools',
     icon: 'Code',
     accent: 'blue',
     skills: [
@@ -80,9 +61,10 @@ export const skillGroups: SkillGroup[] = [
       { name: 'C' },
       { name: 'Java' },
       { name: 'SQL' },
-      { name: 'FastAPI' },
-      { name: 'Streamlit' },
-      { name: 'Git & GitHub' },
+      { name: 'Git' },
+      { name: 'GitHub' },
+      { name: 'VS Code' },
+      { name: 'Google Colab' },
     ],
   },
 ];

@@ -36,10 +36,17 @@ export function Footer() {
           >
             <Icon name="Linkedin" className="h-4 w-4" />
           </a>
+          <a
+            href="mailto:varshakaleeswaran@gmail.com"
+            className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/[0.06] bg-white/[0.02] text-slate-400 transition-colors hover:border-accent-blue/40 hover:text-white focus-ring"
+            aria-label="Email"
+          >
+            <Icon name="Mail" className="h-4 w-4" />
+          </a>
         </nav>
 
         <p className="text-xs text-slate-500">
-          © {year} Varsha Kaleeswaran. Built with React, Vite &amp; Tailwind CSS.
+          © {year} Varsha Kaleeswaran. Built with React, TypeScript, Vite &amp; Tailwind CSS.
         </p>
       </div>
     </footer>

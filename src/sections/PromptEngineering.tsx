@@ -2,6 +2,7 @@ import { Section } from '@/components/Section';
 import { GlassCard } from '@/components/GlassCard';
 import { Icon } from '@/components/Icon';
 import { cn } from '@/lib/cn';
+import type { AccentColor } from '@/data/types';
 
 const techniques = [
   {
@@ -18,7 +19,7 @@ const techniques = [
   },
   {
     title: 'Structured Outputs',
-    body: 'Designing prompts that return structured, machine-readable formats for downstream programmatic use.',
+    body: 'Designing prompts that return structured, machine-readable formats for downstream programmatic use. Used in Career Forge to get fixed JSON schema output from the LLM.',
   },
   {
     title: 'Context Engineering',
@@ -34,7 +35,7 @@ const techniques = [
   },
   {
     title: 'RAG-Based Context Grounding',
-    body: 'Pairing prompts with retrieved context so answers are anchored in source documents rather than model memory.',
+    body: 'Pairing prompts with retrieved context so answers are anchored in source documents rather than model memory. Applied in the RAG-Based PDF Assistant.',
   },
   {
     title: 'Evaluation & Iterative Improvement',
@@ -42,22 +43,47 @@ const techniques = [
   },
 ];
 
-const accentBox: Record<string, string> = {
+const workflowSteps = [
+  'Understand the Task',
+  'Define Role & Context',
+  'Structure Instructions',
+  'Add Examples / Constraints',
+  'Specify Output Format',
+  'Evaluate',
+  'Refine',
+];
+
+const accentBox: Record<AccentColor, string> = {
   cyan: 'border-accent-cyan/20 bg-accent-cyan/10 text-accent-cyan',
   blue: 'border-accent-blue/20 bg-accent-blue/10 text-accent-blue',
   violet: 'border-accent-violet/20 bg-accent-violet/10 text-accent-violet',
 };
 
-const accents: Array<'cyan' | 'blue' | 'violet'> = ['cyan', 'blue', 'violet'];
+const accents: AccentColor[] = ['cyan', 'blue', 'violet'];
 
 export function PromptEngineering() {
   return (
     <Section
       id="prompt-engineering"
       label="Prompt Engineering"
-      title="Practical experience designing prompts that work."
-      description="Prompt engineering is central to how I build LLM applications. These are the techniques I focus on in practice. I do not claim to have applied a specific technique inside a project unless that project's case study documents it."
+      title="Practical Prompt Engineering"
+      description="I use structured prompting to make LLM interactions clearer, more consistent, and easier to evaluate."
     >
+      <div className="mb-8 overflow-x-auto">
+        <div className="flex min-w-max items-center gap-2 rounded-2xl glass p-4">
+          {workflowSteps.map((step, i) => (
+            <div key={step} className="flex items-center gap-2">
+              <span className="rounded-lg border border-white/[0.08] bg-white/[0.03] px-3 py-1.5 font-mono text-xs text-slate-300">
+                {step}
+              </span>
+              {i < workflowSteps.length - 1 && (
+                <Icon name="ArrowRight" className="h-4 w-4 shrink-0 text-slate-600" />
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {techniques.map((t, i) => {
           const accent = accents[i % accents.length];
@@ -69,7 +95,7 @@ export function PromptEngineering() {
                   accentBox[accent]
                 )}
               >
-                <Icon name="MessageSquare" className="h-4.5 w-4.5" />
+                <Icon name="MessageSquare" className="h-4 w-4" />
               </div>
               <h3 className="mt-4 text-sm font-semibold text-slate-50">{t.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-slate-400">{t.body}</p>

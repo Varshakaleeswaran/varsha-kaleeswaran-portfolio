@@ -36,48 +36,73 @@ export type IconName =
   | 'Target'
   | 'CheckCircle2'
   | 'AlertTriangle'
-  | 'Rocket';
+  | 'Rocket'
+  | 'Store'
+  | 'Users'
+  | 'Clock'
+  | 'Zap';
+
+export type AccentColor = 'cyan' | 'blue' | 'violet';
 
 export interface Skill {
   name: string;
-  note?: string;
 }
 
 export interface SkillGroup {
   category: string;
   icon: IconName;
-  accent: 'cyan' | 'blue' | 'violet';
+  accent: AccentColor;
   skills: Skill[];
 }
+
+export type ProjectStatus = 'Completed' | 'Ongoing';
 
 export interface Project {
   id: string;
   title: string;
   tagline: string;
-  focus: string;
   description: string;
-  tags: string[];
+  status: ProjectStatus;
+  role: string;
+  technologies: string[];
   github?: string;
-  status?: string;
-  hasCaseStudy: boolean;
-  caseStudyId?: string;
+  period?: string;
+  context?: string;
   icon: IconName;
-  accent: 'cyan' | 'blue' | 'violet';
-  featured?: boolean;
+  accent: AccentColor;
 }
 
-export interface CaseStudySection {
-  heading: string;
-  body: string;
+export interface StarExplanation {
+  situation: string;
+  task: string;
+  action: string;
+  result: string;
+}
+
+export interface InputProcessingOutput {
+  input: string;
+  processing: string;
+  output: string;
 }
 
 export interface CaseStudy {
-  id: string;
   projectId: string;
-  title: string;
-  focus: string;
-  tags: string[];
-  sections: CaseStudySection[];
+  problem: string;
+  objective: string;
+  role: string;
+  star: StarExplanation;
+  technologies: string[];
+  architecture: string[];
+  workflow: string[];
+  implementation: string;
+  aiApproach: string;
+  promptEngineering: string;
+  inputProcessingOutput: InputProcessingOutput;
+  challenges: string[];
+  solutions: string[];
+  resultsOrStatus: string;
+  limitations: string[];
+  futureImprovements: string[];
 }
 
 export interface ExperienceItem {
@@ -86,16 +111,26 @@ export interface ExperienceItem {
   org: string;
   period: string;
   location: string;
-  type: 'Internship' | 'Project' | 'Academic';
+  type: 'Internship' | 'Project' | 'Program';
   summary: string;
   highlights: string[];
   current?: boolean;
+}
+
+export interface EducationItem {
+  id: string;
+  degree: string;
+  institution: string;
+  affiliation: string;
+  cgpa: string;
+  achievement: string;
+  expectedGraduation: string;
 }
 
 export interface Certification {
   id: string;
   title: string;
   issuer: string;
-  date?: string;
+  date: string;
   icon: IconName;
 }

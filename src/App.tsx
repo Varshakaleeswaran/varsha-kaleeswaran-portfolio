@@ -3,23 +3,24 @@ import { Navbar } from '@/components/Navbar';
 import { Hero } from '@/sections/Hero';
 import { About } from '@/sections/About';
 import { Skills } from '@/sections/Skills';
-import { Projects } from '@/sections/Projects';
 import { PromptEngineering } from '@/sections/PromptEngineering';
+import { Projects } from '@/sections/Projects';
 import { Experience } from '@/sections/Experience';
+import { Education } from '@/sections/Education';
 import { Certifications } from '@/sections/Certifications';
 import { Resume } from '@/sections/Resume';
 import { Contact } from '@/sections/Contact';
 import { Footer } from '@/sections/Footer';
 
 export default function App() {
-  const [activeCaseStudy, setActiveCaseStudy] = useState<string | null>(null);
+  const [activeProjectId, setActiveProjectId] = useState<string | null>(null);
 
-  const openCaseStudy = useCallback((id: string) => {
-    setActiveCaseStudy(id);
+  const openProject = useCallback((id: string) => {
+    setActiveProjectId(id);
   }, []);
 
-  const closeCaseStudy = useCallback(() => {
-    setActiveCaseStudy(null);
+  const closeProject = useCallback(() => {
+    setActiveProjectId(null);
   }, []);
 
   const scrollTo = useCallback((id: string) => {
@@ -29,18 +30,18 @@ export default function App() {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') closeCaseStudy();
+      if (e.key === 'Escape') closeProject();
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [closeCaseStudy]);
+  }, [closeProject]);
 
   useEffect(() => {
-    document.body.style.overflow = activeCaseStudy ? 'hidden' : '';
+    document.body.style.overflow = activeProjectId ? 'hidden' : '';
     return () => {
       document.body.style.overflow = '';
     };
-  }, [activeCaseStudy]);
+  }, [activeProjectId]);
 
   return (
     <div className="relative min-h-screen bg-ink-950 text-slate-200">
@@ -49,13 +50,14 @@ export default function App() {
         <Hero onViewProjects={() => scrollTo('projects')} />
         <About />
         <Skills />
-        <Projects
-          activeCaseStudy={activeCaseStudy}
-          onOpenCaseStudy={openCaseStudy}
-          onCloseCaseStudy={closeCaseStudy}
-        />
         <PromptEngineering />
+        <Projects
+          activeProjectId={activeProjectId}
+          onOpenProject={openProject}
+          onCloseProject={closeProject}
+        />
         <Experience />
+        <Education />
         <Certifications />
         <Resume />
         <Contact />

@@ -8,8 +8,8 @@ export function Certifications() {
     <Section
       id="certifications"
       label="Certifications"
-      title="Certifications & professional learning."
-      description="A record of certifications across the AI/ML domain. Issuer and date details will be updated as they are finalized."
+      title="Certifications."
+      description="Professional certifications I have earned."
     >
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {certifications.map((cert) => (
@@ -21,9 +21,7 @@ export function Certifications() {
               <div className="min-w-0">
                 <h3 className="text-sm font-semibold leading-tight text-slate-50">{cert.title}</h3>
                 <p className="mt-1.5 text-xs text-slate-400">{cert.issuer}</p>
-                {cert.date && (
-                  <p className="mt-1 font-mono text-[11px] text-slate-500">{cert.date}</p>
-                )}
+                <p className="mt-1 font-mono text-[11px] text-slate-500">{cert.date}</p>
               </div>
             </div>
           </GlassCard>

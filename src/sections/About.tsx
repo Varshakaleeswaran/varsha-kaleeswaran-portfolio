@@ -1,22 +1,23 @@
 import { Section } from '@/components/Section';
 import { GlassCard } from '@/components/GlassCard';
 import { Icon } from '@/components/Icon';
+import type { IconName } from '@/data/types';
 
 const pillars = [
   {
-    icon: 'Target' as const,
+    icon: 'Target' as IconName,
     title: 'Practical AI Systems',
-    body: 'Focused on building intelligent applications that solve real problems — not demos.',
+    body: 'Focused on building intelligent applications that solve real problems across Generative AI, RAG, NLP, and Computer Vision.',
   },
   {
-    icon: 'Workflow' as const,
+    icon: 'Workflow' as IconName,
     title: 'End-to-End Ownership',
-    body: 'From prompt design and RAG pipelines to FastAPI backends and deployment-ready code.',
+    body: 'From prompt design and RAG pipelines to FastAPI backends, Streamlit interfaces, and embedded integration.',
   },
   {
-    icon: 'Lightbulb' as const,
+    icon: 'Lightbulb' as IconName,
     title: 'Prompt Engineering',
-    body: 'Special interest in instruction design, context engineering, and hallucination reduction.',
+    body: 'Special interest in instruction design, structured outputs, context engineering, and hallucination reduction.',
   },
 ];
 
@@ -25,8 +26,8 @@ export function About() {
     <Section
       id="about"
       label="About"
-      title="Final-year B.Tech student building practical AI systems."
-      description="I'm Varsha Kaleeswaran, a final-year B.Tech Artificial Intelligence and Data Science student and an aspiring AI/ML Developer. I'm interested in building practical AI systems and intelligent applications — with a focus on Generative AI, LLM applications, prompt engineering, RAG, NLP, and Computer Vision."
+      title="B.Tech AI &amp; Data Science student building practical AI applications."
+      description="I'm Varsha Kaleeswaran, a B.Tech Artificial Intelligence & Data Science student focused on building practical AI applications across Generative AI, Prompt Engineering, LLM applications, RAG, NLP, and Computer Vision. My projects include AI-powered career intelligence, document-based question answering, AI memory systems, legal document assistance, civic-tech applications, retail intelligence, accident detection, and computer-vision robotics."
     >
       <div className="grid gap-4 sm:grid-cols-3">
         {pillars.map((p) => (

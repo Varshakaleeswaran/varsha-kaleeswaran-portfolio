@@ -1,16 +1,18 @@
-import { useEffect, useState } from 'react';
-import { cn } from '@/lib/cn';
-
 const navItems = [
   { id: 'home', label: 'Home' },
   { id: 'about', label: 'About' },
   { id: 'skills', label: 'Skills' },
+  { id: 'prompt-engineering', label: 'Prompt Engineering' },
   { id: 'projects', label: 'Projects' },
   { id: 'experience', label: 'Experience' },
+  { id: 'education', label: 'Education' },
   { id: 'certifications', label: 'Certifications' },
   { id: 'resume', label: 'Resume' },
   { id: 'contact', label: 'Contact' },
 ];
+
+import { useEffect, useState } from 'react';
+import { cn } from '@/lib/cn';
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -74,13 +76,13 @@ export function Navbar() {
           </span>
         </a>
 
-        <ul className="hidden items-center gap-1 lg:flex">
+        <ul className="hidden items-center gap-1 xl:flex">
           {navItems.map((item) => (
             <li key={item.id}>
               <button
                 onClick={() => handleNav(item.id)}
                 className={cn(
-                  'rounded-lg px-3 py-2 text-sm font-medium transition-colors focus-ring',
+                  'rounded-lg px-2.5 py-2 text-sm font-medium transition-colors focus-ring',
                   active === item.id
                     ? 'text-white'
                     : 'text-slate-400 hover:text-white'
@@ -94,7 +96,7 @@ export function Navbar() {
         </ul>
 
         <button
-          className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-slate-200 hover:bg-white/[0.05] focus-ring lg:hidden"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-slate-200 hover:bg-white/[0.05] focus-ring xl:hidden"
           onClick={() => setOpen((v) => !v)}
           aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
@@ -116,11 +118,10 @@ export function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile menu */}
       <div
         className={cn(
-          'overflow-hidden border-t border-white/[0.06] bg-ink-900/95 backdrop-blur-xl transition-[max-height,opacity] duration-300 lg:hidden',
-          open ? 'max-h-[520px] opacity-100' : 'max-h-0 opacity-0'
+          'overflow-hidden border-t border-white/[0.06] bg-ink-900/95 backdrop-blur-xl transition-[max-height,opacity] duration-300 xl:hidden',
+          open ? 'max-h-[560px] opacity-100' : 'max-h-0 opacity-0'
         )}
       >
         <ul className="mx-auto grid max-w-6xl grid-cols-2 gap-1 px-5 py-4 sm:px-8">
